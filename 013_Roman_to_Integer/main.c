@@ -58,7 +58,9 @@ int romanToInt(char* s)
 			}
 			else
 			{	
-				romanArr2[arr2Index]=romanArr[i];
+				romanArr2[arr2Index]+=romanArr2[arr2Index]*same_count;
+				arr2Index++;
+				same_count=0;
 			}
 		}
 	}//end of for
