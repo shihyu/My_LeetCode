@@ -16,7 +16,8 @@ int* charToIntArr(char* s);
 int main(int argc, const char *argv[])
 {
 	
-	char *roman1="CDLXXXXVI";
+	//char *roman1="CDLXXVI";
+	char *roman1="MMMCMXCIX";
 	int result=0;
 	result=romanToInt(roman1);
 
@@ -31,6 +32,8 @@ int romanToInt(char* s)
 	int * romanArr2;
 	int origin_length=0;
 	int arr2Index=0;
+	int same_count=0;
+	int result=0;
 	origin_length=strlen(s);
 	
   
@@ -43,9 +46,9 @@ int romanToInt(char* s)
 //conbine same interger
 
 	romanArr2[0]=romanArr[0];
+
 	for(int i=1; i<origin_length; i++)
 	{
-		int same_count=0;	
 		if(romanArr2[arr2Index]==romanArr[i])
 		{
 			same_count++;
@@ -54,31 +57,41 @@ int romanToInt(char* s)
 		{
 			if(same_count==0)
 			{
-				romanArr2[arr2Index++]=romanArr[i];
+				romanArr2[++arr2Index]=romanArr[i];
 			}
 			else
 			{	
-				romanArr2[arr2Index]+=romanArr2[arr2Index]*same_count;
-				arr2Index++;
+				romanArr2[arr2Index]=romanArr2[arr2Index]*(same_count+1);
+				romanArr2[++arr2Index]=romanArr[i];
 				same_count=0;
 			}
 		}
 	}//end of for
-
-	for(int i=0;i<strlen(s);i++)
-	{
-		printf("%d ", romanArr2[i]);
-	}
 
 
 //perform right combination rule
 //if left >= right then add
 //else then substract
 
+	result=romanArr2[origin_length-1];
+	for (int i = origin_length-1;i>=0;i--)
+	{
+		if(romanArr2[i] < result )
+		{
+			result = result - romanArr2[i];
+		}
+		else 
+		{
+			result = romanArr2[i] + result;
+
+		}
+	}//end of for
+
+
 
 	free(romanArr);
 	free(romanArr2);
-	return 0;
+	return result;
 
 }
 
@@ -111,6 +124,9 @@ int* charToIntArr(char* s)
 			break;
 			case 'D':
 				retArr[i]=500;
+			break;
+			case 'M':
+				retArr[i]=1000;
 			break;
 		}
 	}//end of for
