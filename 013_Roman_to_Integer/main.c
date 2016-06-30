@@ -16,8 +16,9 @@ int* charToIntArr(char* s);
 int main(int argc, const char *argv[])
 {
 	
-	//char *roman1="CDLXXVI";
-	char *roman1="MMMCMXCIX";
+	//char *roman1="MCMXCVI";
+	char *roman1="MMCCCXCIX";
+	//char *roman1="MMMCMXCIX";
 	int result=0;
 	result=romanToInt(roman1);
 
@@ -28,8 +29,8 @@ int main(int argc, const char *argv[])
 
 int romanToInt(char* s) 
 {
-	int * romanArr;
-	int * romanArr2;
+	int * romanArr=NULL;
+	int * romanArr2=NULL;
 	int origin_length=0;
 	int arr2Index=0;
 	int same_count=0;
@@ -69,12 +70,14 @@ int romanToInt(char* s)
 	}//end of for
 
 
+
 //perform right combination rule
 //if left >= right then add
 //else then substract
 
 	result=romanArr2[origin_length-1];
-	for (int i = origin_length-1;i>=0;i--)
+	printf("%d ", result);
+	for (int i = origin_length-2;i>=0;i--)
 	{
 		if(romanArr2[i] < result )
 		{
@@ -85,6 +88,7 @@ int romanToInt(char* s)
 			result = romanArr2[i] + result;
 
 		}
+		printf("%d ", result);
 	}//end of for
 
 
@@ -98,7 +102,7 @@ int romanToInt(char* s)
 int* charToIntArr(char* s)
 {
 	int length=0;
-	int* retArr;
+	int* retArr=NULL;
 	length =	strlen(s);
   
 	retArr = malloc(sizeof(int)*length);
