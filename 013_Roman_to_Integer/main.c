@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#define debug 1
 /*
  *
  * Given a roman numeral, convert it to an integer.
@@ -16,8 +18,8 @@ int* charToIntArr(char* s);
 int main(int argc, const char *argv[])
 {
 	
-	//char *roman1="MCMXCVI";
-	char *roman1="MMCCCXCIX";
+	char *roman1="MDLXX";
+	//char *roman1="MMCCCXCIX";
 	//char *roman1="MMMCMXCIX";
 	int result=0;
 	result=romanToInt(roman1);
@@ -43,8 +45,17 @@ int romanToInt(char* s)
 
 	//convert char to Integer
 	romanArr = charToIntArr(s);
-	
-//conbine same interger
+
+#if debug
+	printf("roamnArr = ");
+	for(int i=0;i<origin_length;i++)
+	{
+		printf(" %d ", romanArr[i]);
+	}
+	printf("\n");
+#endif
+
+	//conbine same interger
 
 	romanArr2[0]=romanArr[0];
 
@@ -52,7 +63,15 @@ int romanToInt(char* s)
 	{
 		if(romanArr2[arr2Index]==romanArr[i])
 		{
-			same_count++;
+			if(i==origin_length-1)
+			{
+				same_count++;
+				romanArr2[arr2Index]=romanArr2[arr2Index]*(same_count+1);
+			}
+			else
+			{
+				same_count++;
+			}
 		}
 		else
 		{
@@ -69,6 +88,18 @@ int romanToInt(char* s)
 		}
 	}//end of for
 
+#if debug
+if(arr2Index < origin_length-1)
+{
+	romanArr2[++arr2Index]=0;
+}
+printf("\n");
+#endif
+printf("roamnArr2= ");
+for(int i=0;i<origin_length;i++)
+{
+	printf(" %d ", romanArr2[i]);
+}
 
 
 //perform right combination rule
@@ -88,7 +119,10 @@ int romanToInt(char* s)
 			result = romanArr2[i] + result;
 
 		}
-		printf("%d ", result);
+		#if debug
+			
+			//printf("%d ", result);
+		#endif
 	}//end of for
 
 
