@@ -18,7 +18,7 @@ int* charToIntArr(char* s);
 int main(int argc, const char *argv[])
 {
 	
-	char *roman1="MDLXX";
+	char *roman1="MMCCCVII";
 	//char *roman1="MMCCCXCIX";
 	//char *roman1="MMMCMXCIX";
 	int result=0;
@@ -88,19 +88,19 @@ int romanToInt(char* s)
 		}
 	}//end of for
 
-#if debug
-if(arr2Index < origin_length-1)
+while(arr2Index < origin_length-1)
 {
 	romanArr2[++arr2Index]=0;
 }
 printf("\n");
-#endif
+#if debug
 printf("roamnArr2= ");
 for(int i=0;i<origin_length;i++)
 {
 	printf(" %d ", romanArr2[i]);
 }
 
+#endif
 
 //perform right combination rule
 //if left >= right then add
