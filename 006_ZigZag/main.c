@@ -25,7 +25,7 @@ int main(int argc, const char *argv[])
 {
 	char* testCase="ABCDEFGHIJKLMNO";	
   char* result;
-	result = convert(testCase,3);
+	result = convert(testCase,4);
 
 	printf("result=%s\n", result);
 
@@ -49,7 +49,7 @@ char* convert(char* s, int numRows)
 		{
 		  printf("%c ", s[j]);	
 			tempStr[index++]=s[j];
-			if(i >0 && i<numRows-1)
+			if(i >0 && i<numRows-1 && (j+((numRows-i-1)*2)) < length)
 			{	
 				tempStr[index++]=s[j+((numRows-i-1)*2)];
 				printf("%c ", s[j+((numRows-i-1)*2)]);
