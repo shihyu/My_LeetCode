@@ -2,29 +2,31 @@
 #include <stdlib.h>
 #include <math.h>
 
-int reverse(int x);
+long int reverse(int x);
 int main(int argc, const char *argv[])
 {
 	
-	int input=123;
-	int result=0;
+	int input=1534236469;
+	long int result=0;
 	result=reverse(input);
 
-	printf("result=%d\n", result);
+	printf("result=%ld\n", result);
 
 	return 0;
 }
 
-int reverse(int x) {
+long int reverse(int x) {
 
 	int positive=1;
   int count=0;
-	int result=0;
+	long int result=0;
 	int Q = 0;
 
 	if (x<0)
+	{
 		positive=-1;
-
+		x*=-1;
+	}
 	if(x==0)
 		return 0;
 
