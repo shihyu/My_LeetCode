@@ -10,7 +10,7 @@ int isNum(int input);
 
 int main(int argc, const char *argv[])
 {
-	char* input="12345";
+	char* input=" -123456   ";
 	int result=0;
 	result=myAtoi(input);
 	printf("result=''%d''\n", result);
@@ -114,19 +114,22 @@ int myAtoi(char* str)
 	}//end of for
 
 
-	count=(last-first)+1;
+	count=(last-first);
 
 	//start convert
 	for(int i=first; i<=last ; i++)
 	{
+	
+		//prevent overflow here
+		if( tempArr[i] > 2 && result > 147483647)
+								return 0;	
 		
 		result+=tempArr[i]*pow(10, count--);
 
-		//overflow check
-		
-
 
 	}//end of for
+
+	result*=positive;
 
 	free(tempArr);
 
