@@ -10,7 +10,7 @@ int isNum(int input);
 
 int main(int argc, const char *argv[])
 {
-	char* input="+-2";
+	char* input="  010";
 	int result=0;
 	result=myAtoi(input);
 	printf("result=''%d''\n", result);
@@ -22,13 +22,10 @@ int charToInt(char ch)
 {
 	int tmp=(int)ch;
 
-	if(tmp==32)
-	{ //if space
-		return 32;
-	}
-	else if(tmp==45)
-	{ //if minus -
-		return 45;
+	
+	if(tmp==45 || tmp==43 || tmp==32 )
+	{ //if minus - + space
+		return tmp;
 	}
 	else if(tmp<48 && tmp>57)
 	{
@@ -76,13 +73,13 @@ int myAtoi(char* str)
 	for (int i=0; i<length; i++)
 	{
 		
-		if(tempArr[i]==45 && i < length-1 &&first==-1)
+		if((tempArr[i]==43 || tempArr[i]==45) && i < length-1 &&first==-1)
 		{ //if there is a "-"i, then check next one, 
 			//if next one is numeric then go to next circle
 			//if not, mean this case is not a numeric case, jsut return 0
 			if(isNum(tempArr[i+1]))
 			{
-				positive=-1;
+				positive=44-tempArr[i];
 				continue;
 			}
 			else
