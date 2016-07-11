@@ -10,7 +10,7 @@ int isNum(int input);
 
 int main(int argc, const char *argv[])
 {
-	char* input=" -123456   ";
+	char* input="+-2";
 	int result=0;
 	result=myAtoi(input);
 	printf("result=''%d''\n", result);
@@ -109,6 +109,10 @@ int myAtoi(char* str)
 			//meant it's the end of this sequence,
 			//just break this loop
 			break;
+		}
+		else if(!isNum(tempArr[i]) && first==-1)
+		{
+			return 0;
 		}
 
 	}//end of for
