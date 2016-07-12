@@ -87,7 +87,7 @@ int myAtoi(char* str)
 				return 0;
 			}			
 		}//end of 
-		else if(isNum(tempArr[i]) && first==-1)
+		else if(isNum(tempArr[i]) && tempArr[i]!=0 && first==-1)
 		{
 			//if this is the first found numeric,
 			//then record the positon as start and end
@@ -107,7 +107,7 @@ int myAtoi(char* str)
 			//just break this loop
 			break;
 		}
-		else if(!isNum(tempArr[i]) && first==-1)
+		else if(!isNum(tempArr[i]) && tempArr[i]!=32 && first==-1)
 		{
 			return 0;
 		}
