@@ -10,7 +10,7 @@ int isNum(int input);
 
 int main(int argc, const char *argv[])
 {
-	char* input="  010";
+	char* input="    +004500";
 	int result=0;
 	result=myAtoi(input);
 	printf("result=''%d''\n", result);
@@ -77,6 +77,7 @@ int myAtoi(char* str)
 		{ //if there is a "-"i, then check next one, 
 			//if next one is numeric then go to next circle
 			//if not, mean this case is not a numeric case, jsut return 0
+			
 			if(isNum(tempArr[i+1]))
 			{
 				positive=44-tempArr[i];
@@ -86,7 +87,20 @@ int myAtoi(char* str)
 			{
 				return 0;
 			}			
-		}//end of 
+		}//end of
+	  else if(first==-1 &&tempArr[i]==0)
+		{
+			//find the next non zero numeric
+			for(int ss=i;ss<length;ss++)
+			{
+				if(tempArr[ss]!=0)
+				{
+					i=ss-1;
+					break;
+				}
+			}	
+		
+		}	
 		else if(isNum(tempArr[i]) && tempArr[i]!=0 && first==-1)
 		{
 			//if this is the first found numeric,
