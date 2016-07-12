@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <limits.h>
 
 char* mytrim(char* str);
 int myAtoi(char* str);
@@ -10,7 +11,7 @@ int isNum(int input);
 
 int main(int argc, const char *argv[])
 {
-	char* input="    +004500";
+	char* input="    +11191657170";
 	int result=0;
 	result=myAtoi(input);
 	printf("result=''%d''\n", result);
@@ -93,7 +94,11 @@ int myAtoi(char* str)
 			//find the next non zero numeric
 			for(int ss=i;ss<length;ss++)
 			{
-				if(tempArr[ss]!=0)
+				if(!isNum(tempArr[ss]))
+				{
+					return 0;
+				}
+				else if(tempArr[ss]!=0)
 				{
 					i=ss-1;
 					break;
@@ -129,17 +134,31 @@ int myAtoi(char* str)
 	}//end of for
 
 
-	count=(last-first);
+	if(last-first > 9 || (last-first >= 9 && tempArr[first]>2))
+	{
+		if(positive == 1)
+			return INT_MAX;
+		else
+			return INT_MIN;
+	
+	}
+		
+	//count=(last-first);
 
 	//start convert
-	for(int i=first; i<=last ; i++)
+	for(int i=last; i>=first ; i--)
 	{
 	
 		//prevent overflow here
-		if( tempArr[i] > 2 && result > 147483647)
-								return 0;	
-		
-		result+=tempArr[i]*pow(10, count--);
+		if(positive==1 && tempArr[i] >= 2 && result > 147483647)
+		{
+			return INT_MAX;	
+		}
+		else if(positive==-1 && tempArr[i] >= 2 && result > 147483647)
+		{
+			return INT_MIN;	
+		}
+		result+=tempArr[i]*pow(10, count++);
 
 
 	}//end of for
