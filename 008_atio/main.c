@@ -23,15 +23,15 @@ int charToInt(char ch)
 {
 	int tmp=(int)ch;
 
-	
+  //if 	- + space, just return
 	if(tmp==45 || tmp==43 || tmp==32 )
-	{ //if minus - + space
+	{
 		return tmp;
 	}
-	else if(tmp<48 && tmp>57)
+	else if(tmp<48 && tmp>57)//is not numeric just return -1
 	{
 		return -1;
-	}
+	}//else -48, meant 0~9
 	return tmp-48;
 
 }
@@ -96,10 +96,12 @@ int myAtoi(char* str)
 			{
 				if(!isNum(tempArr[ss]))
 				{
+					//if next one is not numeric just return 0
 					return 0;
 				}
 				else if(tempArr[ss]!=0)
 				{
+					//found the next non zero numeric
 					i=ss-1;
 					break;
 				}
@@ -128,12 +130,14 @@ int myAtoi(char* str)
 		}
 		else if(!isNum(tempArr[i]) && tempArr[i]!=32 && first==-1)
 		{
+			//the first non-numeric is not space
 			return 0;
 		}
 
 	}//end of for
 
 
+	//check the overflow
 	if(last-first > 9 || (last-first >= 9 && tempArr[first]>2))
 	{
 		if(positive == 1)
@@ -143,20 +147,17 @@ int myAtoi(char* str)
 	
 	}
 		
-	//count=(last-first);
-
 	//start convert
 	for(int i=last; i>=first ; i--)
 	{
 	
-		//prevent overflow here
-		if(positive==1 && tempArr[i] >= 2 && result > 147483647)
+		//prevent overflow more detaily here
+		if(tempArr[i] >= 2 && result > 147483647)
 		{
-			return INT_MAX;	
-		}
-		else if(positive==-1 && tempArr[i] >= 2 && result > 147483647)
-		{
-			return INT_MIN;	
+			if(positive==1)
+				return INT_MAX;
+			else
+				return INT_MIN;	
 		}
 		result+=tempArr[i]*pow(10, count++);
 
